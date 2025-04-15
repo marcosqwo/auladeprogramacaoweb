@@ -1,0 +1,14 @@
+export class Forma {
+
+  calculararea(){
+
+  }
+
+
+
+
+
+
+
+
+}
