@@ -7,6 +7,8 @@ import { ExemploAulaComponent } from './componente/exemplo-aula/exemplo-aula.com
 import { CabecalhoComponent } from './componente/cabecalho/cabecalho.component';
 import { RodapeComponent } from './componente/rodape/rodape.component';
 import { TabelaComponent } from './componente/tabela/tabela.component';
+import { PaginaInicialComponent } from './componente/pagina-inicial/pagina-inicial.component';
+import { VisualizarTarefaComponent } from './componente/visualizar-tarefa/visualizar-tarefa.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { TabelaComponent } from './componente/tabela/tabela.component';
     ExemploAulaComponent,
     CabecalhoComponent,
     RodapeComponent,
-    TabelaComponent
+    TabelaComponent,
+    PaginaInicialComponent,
+    VisualizarTarefaComponent
   ],
   imports: [
     BrowserModule,

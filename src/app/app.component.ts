@@ -1,20 +1,5 @@
 import { Component } from '@angular/core';
-import {Carro} from "./core/model/carro";
-import {Sedan} from "./core/model/sendan";
-import {ContaBancaria} from "./core/model/conta-bancaria";
-import {Gato} from "./core/model/gato";
-import {Galinha} from "./core/model/galinha";
-import {Cachorro} from "./core/model/cachorro";
-import {Moto} from "./core/model/moto";
-import {Animal} from "./core/model/animal";
-import {Circulo} from "./core/model/circulo";
-import {Retangulo} from "./core/model/retangulo";
-import {Forma} from "./core/model/forma";
-import {Livros} from "./core/model/livros";
-import {Eletronicos} from "./core/model/eletronicos";
-import {Alimentos} from "./core/model/alimentos";
-import {Pessoa} from "./core/model2/pessoa";
-import {Funcionario} from "./core/model2/funcionario";
+
 
 @Component({
   selector: 'app-root',
