@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Tarefaservice} from "../../app-core/service/tarefaservice.service";
 import {Tarefa} from "../../app-core/model/tarefa";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 declare var $: any;
 @Component({
   selector: 'app-visualizar-tarefa',
@@ -11,9 +12,19 @@ export class VisualizarTarefaComponent implements OnInit {
 
 
   tarefas : Tarefa[] = [];
+  form: FormGroup;
 
-  constructor(private tarefaService: Tarefaservice) {
-     this.tarefas  =   this.tarefaService.populartabelateste();
+  constructor(private tarefaService: Tarefaservice ,private fb: FormBuilder) {
+
+    this.tarefas  =   this.tarefaService.populartabelateste();
+     this.form = this.fb.group({
+       tituloTarefa: ['', Validators.required],
+       dataInicioTarefa: ['', Validators.required],
+       dataCoclusaoTarefa: ['', Validators.required],
+       statusTarefa: ['', Validators.required],
+       descricaoTarefa: ['', Validators.required],
+
+     })
 
   }
 
@@ -34,4 +45,13 @@ export class VisualizarTarefaComponent implements OnInit {
   closeModal(){
     $('#add-tarefa').modal('hide');
   }
+  salvarTarefa():void{
+    console.log(this.form.value);
+  }
+
+
+
+
+
 }
+

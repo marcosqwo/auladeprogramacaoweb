@@ -9,6 +9,7 @@ import { RodapeComponent } from './componente/rodape/rodape.component';
 import { TabelaComponent } from './componente/tabela/tabela.component';
 import { PaginaInicialComponent } from './componente/pagina-inicial/pagina-inicial.component';
 import { VisualizarTarefaComponent } from './componente/visualizar-tarefa/visualizar-tarefa.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { VisualizarTarefaComponent } from './componente/visualizar-tarefa/visual
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

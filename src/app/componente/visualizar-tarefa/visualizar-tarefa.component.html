@@ -43,41 +43,56 @@
       <div class="modal-header">
           <h5 class="modal-title">Adicionar Tarefas</h5>
       </div>
+      <form [formGroup]="form" (ngSubmit)="salvarTarefa()">
         <div class="modal-body">
-            <form>
+
               <div class="form-row">
                 <div class="mb-3 col-md-12">
                   <label for="titulotarefa" class="form-label">Titulo Tarefa
 
                   </label>
-             <input type="text" class="form-control" id="titulotarefa" placeholder="Digite o título da tarefa">
+             <input type="text" class="form-control" id="titulotarefa" formControlName="tituloTarefa" placeholder="Digite o título da tarefa">
                 </div>
 
 
                 <div class="mb-3 col-md-6">
-                  <label class="form-label" for="datainiciotarefa">Data Inicio</label>
-                  <input class="form-control" type="datetime-local" id="datainiciotarefa">
+                  <label class="form-label" for="datainiciotarefa" >Data Inicio</label>
+                  <input class="form-control" type="datetime-local" id="datainiciotarefa" formControlName="dataInicioTarefa">
                 </div>
                 <div class="mb-3 col-md-6">
-                  <label class="form-label" for="dataconclusaotarefa">Data Conclusão</label>
-                  <input class="form-control" type="datetime-local" id="dataconclusaotarefa">
+                  <label class="form-label" for="dataconclusaotarefa" >Data Conclusão</label>
+                  <input class="form-control" type="datetime-local" id="dataconclusaotarefa" formControlName="dataCoclusaoTarefa">
                 </div>
+
               </div>
 
+             <div>
+               <div class="mb-3 col-md-6"></div>
+               <div class="mb-3 col-md-6"></div>
+
+               <div class="md-3 col">
+                 <label >Status</label>
+                 <select class="form-control" formControlName="statusTarefa">
+                   <option value="NOVA">Nova</option>
+                   <option value="EM ANDAMENTO" >Em andamento</option>
+                   <option value="CONCLUIDA">Concluida</option>
+                 </select>
+               </div>
+               <div class="md-12 col-md-12">
+                 <label >Descrição da Tarefa</label>
+                  <textarea class="form-control" rows="3" formControlName="descricaoTarefa"></textarea>
+               </div>
+             </div>
 
 
-
-
-
-            </form>
 
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-bs-dismiss="modal"
             (click)="closeModal()">Fechar</button>
-            <button class="btn btn-success" type="button" (click)="addtarefa()">Salvar</button>
+            <button class="btn btn-success" type="submit">Salvar</button>
           </div>
-
+      </form>
 
     </div>
   </div>
