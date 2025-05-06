@@ -46,11 +46,28 @@ export class VisualizarTarefaComponent implements OnInit {
     $('#add-tarefa').modal('hide');
   }
   salvarTarefa():void{
-    console.log(this.form.value);
+    if(this.form.valid){
+      console.log(this.form.value);
+      console.log("CADASTRO REALIZADO COM SUCESSO!");
+      this.form.reset();
+    }else {
+      console.log("Campos Invalidos Encontrados");
+      this.marcartodoscomoclicados();
+    }
+
+
+
   }
 
-
-
+marcartodoscomoclicados(){
+    Object.values(this.form.controls).forEach(campo  => {
+      campo.markAsTouched();
+    });
+}
+iscampovalido(inputName:string):boolean{
+    const campo : any = this.form.get(inputName);
+    return campo && campo.touched && campo.invalid;
+}
 
 
 }
