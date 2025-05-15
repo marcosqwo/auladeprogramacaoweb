@@ -1,5 +1,5 @@
 export class Tarefa {
-  id : number;
+  id? : number;
   titulo: string;
   dataInicio: string;
   dataConclusao: string;
@@ -7,7 +7,7 @@ export class Tarefa {
   descricao: string;
 
 
-  constructor( titulo: string, dataInicio: string, dataConclusao: string, status: string, descricao: string ,id: number) {
+  constructor( titulo: string, dataInicio: string, dataConclusao: string, status: string, descricao: string ,id?: number) {
     this.titulo = titulo;
     this.dataInicio = dataInicio;
     this.dataConclusao = dataConclusao;

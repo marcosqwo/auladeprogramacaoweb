@@ -5,7 +5,7 @@
      Nova Tarefa
    </button>
  </h2>
-  <table *ngIf="tarefas.length > 0"  class="table-hover table table-striped">
+  <table *ngIf="tarefas.length > 0 && !loading"  class="table-hover table table-striped">
     <thead>
         <tr>
           <th scope="col">#</th>
@@ -20,7 +20,7 @@
       <tr *ngFor="let t of tarefas;let i = index">
         <th scope="row">{{ i+1 }}</th>
         <td>{{t?.titulo}}</td>
-        <td>{{t?.dataInicio}}</td>
+        <td>{{t?.dataInicio | date:'dd/MM/yyyy'}}</td>
         <td>{{t?.status}}</td>
 
         <button class="btn btn-danger rounded-circle"><i class="fas fa-trash"></i> </button>
@@ -29,7 +29,7 @@
       </tr>
     </tbody>
   </table>
-  <div *ngIf="tarefas.length <= 0" class="d-flex justify-content-center">
+  <div *ngIf="tarefas.length <= 0 && loading" class="d-flex justify-content-center">
     <i class="fas fa-spin fa-spinner fa-3x fa-fw"></i>
     <h3>CARREGANDO...</h3>
   </div>
@@ -43,7 +43,7 @@
       <div class="modal-header">
           <h5 class="modal-title">Adicionar Tarefas</h5>
       </div>
-      <form [formGroup]="form" (ngSubmit)="salvarTarefa()">
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
         <div class="modal-body">
 
               <div class="form-row">
