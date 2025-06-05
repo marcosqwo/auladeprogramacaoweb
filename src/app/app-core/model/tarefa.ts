@@ -3,16 +3,16 @@ export class Tarefa {
   titulo: string;
   dataInicio: string;
   dataConclusao: string;
-  status : string;
-  descricao: string;
+  statusTarefa: string;
+  descricaoTarefa: string;
 
 
   constructor( titulo: string, dataInicio: string, dataConclusao: string, status: string, descricao: string ,id?: number) {
     this.titulo = titulo;
     this.dataInicio = dataInicio;
     this.dataConclusao = dataConclusao;
-    this.status = status;
-    this.descricao = descricao;
+    this.statusTarefa = status;
+    this.descricaoTarefa = descricao;
     this.id = id;
   }
 }
