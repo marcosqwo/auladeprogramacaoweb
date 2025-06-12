@@ -3,6 +3,7 @@ import {Tarefaservice} from "../../app-core/service/tarefaservice.service";
 import {Tarefa} from "../../app-core/model/tarefa";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {TarefaServiseApiService} from "../../app-core/service/tarefa-servise-api.service";
 
 
 
@@ -17,11 +18,12 @@ export class VisualizarTarefaComponent implements OnInit {
 
 
   tarefas: Tarefa[] = [];
+  tarefasApi: Tarefa[] = [];
   form: FormGroup;
   loading: boolean = true;
   tarefaVisualizar:any;
 
-  constructor(private tarefaService: Tarefaservice, private fb: FormBuilder) {
+  constructor(private tarefaService: Tarefaservice, private fb: FormBuilder, private tarefaServiceApi : TarefaServiseApiService ) {
 
     this.form = this.fb.group({
       tituloTarefa: ['', Validators.required],
@@ -30,8 +32,10 @@ export class VisualizarTarefaComponent implements OnInit {
       statusTarefa: ['', Validators.required],
       descricaoTarefa: ['', Validators.required],
       id: [0],
+      imagem: [''],
     });
 
+    this.buscarTarefasApi();
   }
 
 
@@ -71,7 +75,9 @@ export class VisualizarTarefaComponent implements OnInit {
         this.form.value.dataInicioTarefa,
         this.form.value.dataCoclusaoTarefa,
         this.form.value.statusTarefa,
-        this.form.value.descricaoTarefa);
+        this.form.value.descricaoTarefa,
+        undefined,
+          this.form.value.imagem);
 
       this.tarefaService.adicionarTarefa(novaTarefa).then(resposta => {
         if(resposta > 0) {
@@ -82,7 +88,7 @@ export class VisualizarTarefaComponent implements OnInit {
         }
 
       }).catch(respostaErro => {
-        Swal.fire('Não foi dessa vez!', 'Não foi possivel salvar' + 'a tarefa , tente novamente mais tarde.', 'error')
+        Swal.fire('Não foi dessa vez!', 'Não foi possível salvar' + 'a tarefa , tente novamente mais tarde.', 'error')
         console.log(respostaErro);
       });
 
@@ -131,7 +137,7 @@ export class VisualizarTarefaComponent implements OnInit {
         this.tarefaService.removerTarefa(id).then( ()=> {
           Swal.fire({
             title:'Sucesso!',
-            text:'A tarrefa foi deletada com sucesso!',
+            text:'A tarefa foi deletada com sucesso!',
             icon:'success',
           });
           this.listarTarefas();
@@ -139,7 +145,7 @@ export class VisualizarTarefaComponent implements OnInit {
       }
     }).catch(error=>{
       console.log(error);
-      Swal.fire('Erro!','A tarrefa não foi deletada,'+
+      Swal.fire('Erro!','A tarefa não foi deletada,'+
       'tente novamente mais tarde.'+
         'Caso persistir contate o suporte.',
         'warning'
@@ -157,6 +163,7 @@ export class VisualizarTarefaComponent implements OnInit {
       dataCoclusaoTarefa:tarefa.dataConclusao,
       statusTarefa:tarefa.statusTarefa,
       descricaoTarefa:tarefa.descricaoTarefa,
+      imagem:tarefa.imagem,
       id:tarefa.id
     });
     this.openModal();
@@ -169,7 +176,10 @@ export class VisualizarTarefaComponent implements OnInit {
         this.form.value.dataInicioTarefa,
         this.form.value.dataCoclusaoTarefa,
         this.form.value.statusTarefa,
-        this.form.value.descricaoTarefa
+        this.form.value.descricaoTarefa,
+        this.form.value.id,
+        this.form.value.imagem
+
       );
       this.tarefaService.atualizarTarefa(this.form.value.id,editarTarefa).then(
         resposta => {
@@ -189,16 +199,37 @@ export class VisualizarTarefaComponent implements OnInit {
         }
       ).catch(error => {
         Swal.fire('Cuidado!',
-                    'Não foi possivel editar a tarefa',
+                    'Não foi possível editar a tarefa',
                       'error');
       });
 
     }else {
       Swal.fire('Cuidado!',
-        'Slguns campos estão incorretos',
+        'Alguns campos estão incorretos',
         'warning');
       this.marcartodoscomoclicados();
     }
    }
+   onFileChange(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (loadEvent) => {
+          this.form.patchValue({imagem:loadEvent?.target?.result});
+      };
+      reader.readAsDataURL(file);
+    }
+   }
+
+   buscarTarefasApi(){
+      this.tarefaServiceApi.buscarTarefa().
+      subscribe(respostaDoService =>{
+        this.tarefasApi = respostaDoService;
+      });
+
+   }
+
+
+
   }
 

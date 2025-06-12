@@ -15,7 +15,7 @@ export class Tarefaservice extends Dexie{
   constructor() {
     super('TarefaDB');
     this.version(1).stores({
-      tarefas: '++id,titulo,dataInicio,dataConclusao,' + 'status,descricao'
+      tarefas: '++id,titulo,dataInicio,dataConclusao,' + 'status,descricao,imagem'
     });
   this.tarefas = this.table('tarefas');
   }
